@@ -1,9 +1,10 @@
+from pyclbr import Class
 from django.db import models
 
 # Create your models here.
 class Home(models.Model):
     home_title = models.CharField(max_length=50)
-    home_disc = models.TextField()
+    home_disc = models.CharField(max_length=50)
 
     def __str__(self):
         return self.home_title
@@ -13,9 +14,15 @@ class Home(models.Model):
         verbose_name_plural = "Home carusel"
     
 class Why(models.Model):
-    img = models.ImageField(upload_to='images/why')
-    why_title = models.CharField(max_length=50)
+    icon_select = (
+        ('gantel','Гантель'),
+        ('banka', 'Банка'),
+        ('bike','Велик'),
+        ('timer','Таймер')        
+    )
+    why_title = models.CharField(max_length = 50)
     why_disc = models.TextField()
+    icon = models.CharField(choices=icon_select, max_length = 50)
 
     def __str__(self):
         return self.why_title
@@ -37,18 +44,30 @@ class HomeContent(models.Model):
 
 class Trainer(models.Model):
     full_name = models.CharField(max_length=50)
-    img = models.ImageField(upload_to='images/trainer')
-    facebook = models.URLField()
-    twitter = models.URLField()
-    instagram = models.URLField()
+    img = models.ImageField(upload_to='images/trainer', default = '/static/images/defoult-avatar-icon', blank = True, null = True)
+    facebook = models.URLField(blank = True, null = True)
+    twitter = models.URLField(blank = True, null = True)
+    instagram = models.URLField(blank = True, null = True)
 
     def __str__(self):
         return self.full_name
     
+class Contact(models.Model):
+    name = models.CharField(max_length = 100)
+    email = models.EmailField()
+    phone_number = models.CharField(max_length = 50)
+    message = models.TextField()
+
+    def __str__(self):
+        return self.name
     
+    class Meta():
+        verbose_name = "Contact Us"
+        verbose_name_plural = "Contact Us"
+
 class Footer(models.Model):
     location = models.URLField()
-    phone_number = models.CharField(max_length=20)
+    phone_number = models.CharField(max_length = 50)
     mail = models.CharField(max_length = 50)
     footer_text = models.CharField(max_length=100)
 
