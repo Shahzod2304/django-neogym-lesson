@@ -3,11 +3,11 @@ from django.db import models
 
 # Create your models here.
 class Home(models.Model):
-    home_title = models.CharField(max_length=50)
-    home_disc = models.CharField(max_length=50)
+    title = models.CharField(max_length = 50)
+    disc = models.CharField(max_length = 255)
 
     def __str__(self):
-        return self.home_title
+        return self.title
     
     class Meta():
         verbose_name = "Home carusel"
@@ -20,23 +20,23 @@ class Why(models.Model):
         ('bike','Велик'),
         ('timer','Таймер')        
     )
-    why_title = models.CharField(max_length = 50)
-    why_disc = models.TextField()
+    title = models.CharField(max_length = 50)
+    disc = models.TextField()
     icon = models.CharField(choices=icon_select, max_length = 50)
 
     def __str__(self):
-        return self.why_title
+        return self.title
     
     class Meta():
         verbose_name = "Why"
         verbose_name_plural = "Why"
     
 class HomeContent(models.Model):
-    home_content_title = models.CharField(max_length=50)
-    home_content_disc = models.TextField()
+    title = models.CharField(max_length = 50)
+    disc = models.TextField()
 
     def __str__(self):
-        return self.home_content_title
+        return self.title
     
     class Meta():
         verbose_name = "Home content"
